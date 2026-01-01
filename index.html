@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" manifest="offlineCache.manifest">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PS4 Jailbreak</title>
+
+  <!-- Modern reset -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+    /* Background */
+    body {
+      background: linear-gradient(rgba(5,15,30,.75), rgba(5,15,30,.85)), url("ps4.jpg") center / cover no-repeat fixed;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Card container */
+    .app {
+      width: min(92%, 720px);
+      backdrop-filter: blur(10px);
+      background: rgba(10, 25, 50, 0.65);
+      border-radius: 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.45);
+      padding: 28px 26px 32px;
+    }
+
+    /* Header */
+    .title {
+      text-align: center;
+      margin: 0 0 10px;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      letter-spacing: .5px;
+    }
+
+    .subtitle {
+      text-align: center;
+      opacity: .85;
+      margin-bottom: 24px;
+      font-size: .95rem;
+    }
+
+    /* Grid of buttons */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 64px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0a3a6e, #0d5fa8);
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: .3px;
+      transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
+      box-shadow: 0 8px 18px rgba(0,0,0,.35);
+    }
+
+    .btn:hover,
+    .btn:focus {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #0d5fa8, #1a86e8);
+      box-shadow: 0 12px 28px rgba(0,0,0,.45);
+      outline: none;
+    }
+
+    .btn small {
+      position: absolute;
+      bottom: 8px;
+      right: 12px;
+      font-size: .65rem;
+      opacity: .75;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 26px;
+      text-align: center;
+      font-size: .75rem;
+      opacity: .65;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <h1 class="title">PS4 Jailbreak</h1>
+    <div class="subtitle">Select your firmware to continue</div>
+
+    <div class="grid">
+      <a class="btn" href="index672.html">6.72<small>Stable</small></a>
+      <a class="btn" href="index702.html">7.02<small>GoldHEN</small></a>
+      <a class="btn" href="75XV2/index.html">7.5X<small>XV2</small></a>
+      <a class="btn" href="900/index.html">9.00<small>Latest</small></a>
+    </div>
+
+    <div class="footer">Offline cache supported • Designed for PS4 Browser</div>
+  </div>
+
+  <script>
+    // Auto-detect firmware once and remember it
+    if (localStorage.truefirm == null) {
+      const ua = navigator.userAgent;
+      if (ua.indexOf("6.72") >= 0) {
+        localStorage.truefirm = "index672.html";
+        window.location.href = "index672.html";
+      } else if (ua.indexOf("7.0") >= 0) {
+        localStorage.truefirm = "index702.html";
+        window.location.href = "index702.html";
+      } else if (ua.indexOf("7.5") >= 0) {
+        localStorage.truefirm = "75XV2/index.html";
+        window.location.href = "75XV2/index.html";
+      } else if (ua.indexOf("9.00") >= 0) {
+        localStorage.truefirm = "900/index.html";
+        window.location.href = "900/index.html";
+      }
+    } else {
+      window.location.href = localStorage.truefirm;
+    }
+  </script>
+</body>
+</html>

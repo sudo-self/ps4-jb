@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" manifest="offlineCache.manifest">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PS4 Jailbreak</title>
-
-  <!-- Modern reset -->
+  
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    /* Modern reset */
+    *, *::before, *::after { 
+      box-sizing: border-box; 
+    }
+    
+    html, body { 
+      height: 100%; 
+      margin: 0; 
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+    }
 
     /* Background */
     body {
@@ -17,6 +24,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 20px;
     }
 
     /* Card container */
@@ -27,6 +35,7 @@
       border-radius: 18px;
       box-shadow: 0 20px 50px rgba(0,0,0,.45);
       padding: 28px 26px 32px;
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
     /* Header */
@@ -35,6 +44,7 @@
       margin: 0 0 10px;
       font-size: clamp(1.4rem, 2.5vw, 2rem);
       letter-spacing: .5px;
+      color: #fff;
     }
 
     .subtitle {
@@ -42,6 +52,13 @@
       opacity: .85;
       margin-bottom: 24px;
       font-size: .95rem;
+      color: #b0c7ff;
+    }
+
+    /* GitHub button container */
+    .github-container {
+      text-align: center;
+      margin-bottom: 16px;
     }
 
     /* Grid of buttons */
@@ -49,6 +66,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 16px;
+      margin-bottom: 10px;
     }
 
     .btn {
@@ -66,6 +84,8 @@
       letter-spacing: .3px;
       transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
       box-shadow: 0 8px 18px rgba(0,0,0,.35);
+      border: none;
+      cursor: pointer;
     }
 
     .btn:hover,
@@ -82,6 +102,7 @@
       right: 12px;
       font-size: .65rem;
       opacity: .75;
+      font-weight: normal;
     }
 
     /* Footer */
@@ -90,17 +111,44 @@
       text-align: center;
       font-size: .75rem;
       opacity: .65;
+      color: #8aa2d9;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .app {
+        padding: 20px 18px 24px;
+      }
+      
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      
+      .btn {
+        height: 56px;
+      }
     }
   </style>
-  <!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 
 <body>
   <div class="app">
     <h1 class="title">PS4 Jailbreaks</h1>
-    <!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/sudo-self/ps4-jb" data-color-scheme="no-preference: light_high_contrast; light: light_high_contrast; dark: light_high_contrast;" data-icon="octicon-star" data-size="large" aria-label="Star sudo-self/ps4-jb on GitHub">Star</a>
+    
+    <div class="github-container">
+      <a class="github-button" 
+         href="https://github.com/sudo-self/ps4-jb" 
+         data-color-scheme="dark"
+         data-size="large" 
+         data-show-count="true"
+         aria-label="Star sudo-self/ps4-jb on GitHub">
+        Star on GitHub
+      </a>
+    </div>
+    
     <div class="subtitle">Select your firmware to continue</div>
 
     <div class="grid">
@@ -110,32 +158,39 @@
       <a class="btn" href="900/index.html">9.00<small>Latest</small></a>
     </div>
 
-    <div class="footer">&nbsp;sudo-self.github.io/ps4-jb&nbsp;</div>
+    <div class="footer">sudo-self.github.io/ps4-jb</div>
   </div>
 
+  <!-- GitHub Buttons Script -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  
   <script>
     // Auto-detect firmware once and remember it
-    if (localStorage.truefirm == null) {
-      const ua = navigator.userAgent;
-      if (ua.indexOf("6.72") >= 0) {
-        localStorage.truefirm = "index672.html";
-        window.location.href = "index672.html";
-      } else if (ua.indexOf("7.0") >= 0) {
-        localStorage.truefirm = "index702.html";
-        window.location.href = "index702.html";
-      } else if (ua.indexOf("7.5") >= 0) {
-        localStorage.truefirm = "75XV2/index.html";
-        window.location.href = "75XV2/index.html";
-      } else if (ua.indexOf("9.00") >= 0) {
-        localStorage.truefirm = "900/index.html";
-        window.location.href = "900/index.html";
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.truefirm == null) {
+        const ua = navigator.userAgent;
+        let redirectUrl = null;
+        
+        if (ua.includes("6.72")) {
+          redirectUrl = "index672.html";
+        } else if (ua.includes("7.0")) {
+          redirectUrl = "index702.html";
+        } else if (ua.includes("7.5")) {
+          redirectUrl = "75XV2/index.html";
+        } else if (ua.includes("9.00")) {
+          redirectUrl = "900/index.html";
+        }
+        
+        if (redirectUrl) {
+          localStorage.truefirm = redirectUrl;
+          window.location.href = redirectUrl;
+        }
+      } else {
+        window.location.href = localStorage.truefirm;
       }
-    } else {
-      window.location.href = localStorage.truefirm;
-    }
+    });
   </script>
 </body>
 </html>
-
 
 
